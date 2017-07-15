@@ -136,6 +136,5 @@ class TempMail {
         $client = new \GuzzleHttp\Client();
         $response = $client->get($readMailUrl);
         $dom = HtmlDomParser::str_get_html($response->getBody());
-
     }
 }
