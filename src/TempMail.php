@@ -44,8 +44,13 @@ class TempMail {
      */
     public function getNewAddress($mail = null, $domain = null) {
         try {
-            if (!$domain) {
-                $domains = $this->getDomains();
+            $domains = $this->getDomains();
+
+            if ($domain) {
+                if (!in_array($domain, $domains)) {
+                    throw new Exceptions\UndefinedDomainException();
+                }
+            } else {
                 $domain = $domains[array_rand($domains)];
             }
 
