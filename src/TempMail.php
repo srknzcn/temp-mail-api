@@ -123,6 +123,11 @@ class TempMail {
         return $mails;
     }
 
+    /**
+     * Undocumented function
+     * @param [type] $readMailUrl
+     * @return void
+     */
     public function readMail($readMailUrl = null) {
         try {
             if (!$readMailUrl) {
