@@ -2,7 +2,6 @@
 namespace TempMailAPI;
 
 use TempMailAPI\Exceptions;
-
 use Sunra\PhpSimple\HtmlDomParser;
 use GuzzleHttp\Cookie\CookieJar;
 
