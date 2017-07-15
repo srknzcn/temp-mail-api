@@ -17,6 +17,7 @@
         "sunra/php-simple-html-dom-parser": "^1.5",
         "guzzlehttp/guzzle": "^6.3"
     },
+    
     "autoload": {
         "psr-4": {
             "TempMailAPI\\": "src/"
