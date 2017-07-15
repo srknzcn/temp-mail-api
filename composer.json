@@ -1,0 +1,14 @@
+{
+    "name": "SRKNZCN/temp-mail-api",
+    "description": "Unofficial PHP API for temp-mail.org. You can create new temp email address and read new mails.",
+    "require": {
+        "sunra/php-simple-html-dom-parser": "^1.5",
+        "guzzlehttp/guzzle": "^6.3"
+    },
+    "autoload": {
+        
+        "psr-4": {
+            "TempMailAPI\\": "src/"
+        }
+    }
+}
