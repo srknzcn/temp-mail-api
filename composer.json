@@ -1,5 +1,5 @@
 {
-    "name": "srknzcn/temp-mail-api",
+    "name": "temp-mail-api",
     "description": "Unofficial PHP API for temp-mail.org. You can create new temp email address and read new mails.",
     "keywords": [
         "temp-mail.org",
