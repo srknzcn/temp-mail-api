@@ -5,7 +5,6 @@ use TempMailAPI\Exceptions;
 use Sunra\PhpSimple\HtmlDomParser;
 use GuzzleHttp\Cookie\CookieJar;
 
-
 class TempMail {
 
     protected $domains = null;
