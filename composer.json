@@ -1,5 +1,5 @@
 {
-    "name": "SRKNZCN/temp-mail-api",
+    "name": "srknzcn/temp-mail-api",
     "description": "Unofficial PHP API for temp-mail.org. You can create new temp email address and read new mails.",
     "keywords": [
         "temp-mail.org",
@@ -9,9 +9,9 @@
         "mail-api"
     ],
     "support": {
-        "issues": "https://github.com/SRKNZCN/temp-mail-api/issues",
-        "wiki": "https://github.com/SRKNZCN/temp-mail-api/wiki",
-        "source": "https://github.com/SRKNZCN/temp-mail-api/Instagram-API/"
+        "issues": "https://github.com/srknzcn/temp-mail-api/issues",
+        "wiki": "https://github.com/srknzcn/temp-mail-api/wiki",
+        "source": "https://github.com/srknzcn/temp-mail-api/Instagram-API/"
     },
     "require": {
         "sunra/php-simple-html-dom-parser": "^1.5",
