@@ -3,6 +3,7 @@ namespace TempMailAPI;
 
 use TempMailAPI\Exceptions;
 use Sunra\PhpSimple\HtmlDomParser;
+use GuzzleHttp\Client;
 use GuzzleHttp\Cookie\CookieJar;
 
 class TempMail {
@@ -19,7 +20,7 @@ class TempMail {
      * @return Array
      */
     public function getDomains() {
-        $client = new \GuzzleHttp\Client();
+        $client = new Client();
         $response = $client->get("https://temp-mail.org/en/option/change/");
         $dom = HtmlDomParser::str_get_html($response->getBody());
 
@@ -69,7 +70,7 @@ class TempMail {
             ], $this->cookieJarDomain);
         }
 
-        $client = new \GuzzleHttp\Client($clientParameters);       
+        $client = new Client($clientParameters);       
         $response = $client->get($this->refreshUrl);
 
         $dom = HtmlDomParser::str_get_html($response->getBody());
@@ -100,7 +101,7 @@ class TempMail {
             'mail' => urlencode($mailAddress)
         ], $this->cookieJarDomain);
 
-        $client = new \GuzzleHttp\Client(['cookies' => $jar]);
+        $client = new Client(['cookies' => $jar]);
         $response = $client->get($this->refreshUrl);
         $dom = HtmlDomParser::str_get_html($response->getBody());
 
@@ -129,22 +130,31 @@ class TempMail {
     }
 
     /**
-     * Undocumented function
-     * @param [type] $readMailUrl
-     * @return void
+     * Returns mail body as html
+     * 
+     * @param string $readMailUrl
+     * @return string
      */
     public function readMail($readMailUrl = null) {
         try {
             if (!$readMailUrl) {
-                throw new InvalidMailUrlException();
+                throw new Exceptions\InvalidMailUrlException();
             }
+
+            $client = new Client();
+            $response = $client->get($readMailUrl);
+            $dom = HtmlDomParser::str_get_html($response->getBody());
+
+            $body = $dom->find(".pm-text", 0)->innertext;
+            
+            if ($body == "Message not found!") {
+                throw new Exceptions\MessageNotFoundException();
+            }
+
+            return $body;
         } catch(\Exception $e) {
             echo $e->getMessage();
             return false;
         }
-        
-        $client = new \GuzzleHttp\Client();
-        $response = $client->get($readMailUrl);
-        $dom = HtmlDomParser::str_get_html($response->getBody());
     }
 }
