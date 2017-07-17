@@ -13,6 +13,29 @@ class TempMail {
     protected $cookieJarDomain = ".temp-mail.org";
     protected $mainUrl = "https://temp-mail.org/en/";
     protected $refreshUrl = "https://temp-mail.org/en/option/refresh/";
+    protected $domainsUrl = "http://temp-mail.org/en/option/change/";
+    protected $proxyUrl = null;
+
+    /**
+     * Sets proxy url.
+     * Format:
+     * http://domain.com/proxy.php?url=
+     * 
+     * @param string $url
+     * @return void
+     */
+    public function setProxy($url) {
+        $this->proxyUrl = trim($url);
+    }
+
+    /**
+     * Return api url and prepends proxy url .
+     * 
+     * @return string
+     */
+    protected function prepareUrl($url) {
+        return ($this->proxyUrl ?: null) . $url;
+    }
 
     /**
      * Returns the available domains list on temp-mail.org
@@ -21,7 +44,7 @@ class TempMail {
      */
     public function getDomains() {
         $client = new Client();
-        $response = $client->get("https://temp-mail.org/en/option/change/");
+        $response = $client->get($this->prepareUrl($this->domainsUrl));
         $dom = HtmlDomParser::str_get_html($response->getBody());
 
         $domainSelectBoxOptions = $dom->find('#domain > option');
@@ -71,7 +94,7 @@ class TempMail {
         }
 
         $client = new Client($clientParameters);       
-        $response = $client->get($this->refreshUrl);
+        $response = $client->get($this->prepareUrl($this->refreshUrl));
 
         $dom = HtmlDomParser::str_get_html($response->getBody());
         $mail = $dom->find("#mail", 0);
@@ -102,7 +125,7 @@ class TempMail {
         ], $this->cookieJarDomain);
 
         $client = new Client(['cookies' => $jar]);
-        $response = $client->get($this->refreshUrl);
+        $response = $client->get($this->prepareUrl($this->refreshUrl));
         $dom = HtmlDomParser::str_get_html($response->getBody());
 
         $mailRows = $dom->find("#mails tbody tr");
@@ -142,7 +165,7 @@ class TempMail {
             }
 
             $client = new Client();
-            $response = $client->get($readMailUrl);
+            $response = $client->get($this->prepareUrl($readMailUrl));
             $dom = HtmlDomParser::str_get_html($response->getBody());
 
             $body = $dom->find(".pm-text", 0)->innertext;
