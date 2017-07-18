@@ -10,7 +10,7 @@ class TempMail {
 
     protected $domains = null;
     protected $cookieJar = null;
-    protected $cookieJarDomain = ".temp-mail.org";
+    protected $cookieJarDomain = ".";
     protected $mainUrl = "https://temp-mail.org/en/";
     protected $refreshUrl = "https://temp-mail.org/en/option/refresh/";
     protected $domainsUrl = "http://temp-mail.org/en/option/change/";
