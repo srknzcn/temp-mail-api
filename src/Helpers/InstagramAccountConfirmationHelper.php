@@ -7,7 +7,7 @@ use GuzzleHttp\Client;
 class InstagramAccountConfirmationHelper {
 
     protected $confirmationLinkFinderKey = "accounts/confirm_email";
-    protected $confirmationUrl = null;
+    protected $confirmationUrl = "";
 
     public function __construct($html) {
         $dom = HtmlDomParser::str_get_html($html);
@@ -19,9 +19,14 @@ class InstagramAccountConfirmationHelper {
                 break;
             }
         }
-
+        
         return $this->confirmationUrl;
     }
+
+    public function getConfirmationUrl() {
+        return $this->confirmationUrl;
+    }
+
     public function confirmAccount() {
 
     }

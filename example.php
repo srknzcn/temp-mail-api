@@ -16,8 +16,8 @@ $tempMail = new TempMail();
 // var_dump($response);
 // $mail = $response;
 
-$response = $tempMail->getMails("xorohutet@vektik.com", "Insta");
-var_dump($response);
+// $response = $tempMail->getMails("xorohutet@vektik.com", "Insta");
+// var_dump($response);
 
 
 // $response = $tempMail->readMail("https://temp-mail.org/en/view/de556c8b00a3f68011b52c507c0c10c6/");
@@ -26,3 +26,14 @@ var_dump($response);
 
 // $data = file_get_contents("./test.txt");
 // $instagram = new InstagramAccountConfirmationHelper($data);
+
+
+
+$tempMail = new TempMail();
+$tempMailResponse = $tempMail->getMails("mail@vektik.com", "Insta");
+print_r($tempMailResponse);
+$readMailResponse = $tempMail->readMail($tempMailResponse[0]["readUrl"]);
+print_r($readMailResponse);
+$instagramHelperResponse = new \TempMailAPI\Helpers\InstagramAccountConfirmationHelper($readMailResponse);
+echo "\n\n\n";
+print_r($instagramHelperResponse->getConfirmationUrl());
