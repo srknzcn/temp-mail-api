@@ -138,7 +138,7 @@ class TempMail {
 
             // filter mails
             if ($filter) {
-                if (!stristr($subjectItem->plaintext, $filter)) {
+                if (!stristr($senderItem->plaintext, $filter) || !stristr($subjectItem->plaintext, $filter)) {
                     continue;
                 }
             }
